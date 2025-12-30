@@ -1,0 +1,58 @@
+# Getting Started
+
+Bamboo is an EVM-compatible blockchain indexer provided as a Spring Boot Starter. It simplifies the process of scanning blocks and syncing contract events into your database.
+
+## Prerequisites
+
+- Java 21+
+- Spring Boot 3.x
+- MySQL Database
+
+## Installation
+
+Add the dependency to your `pom.xml`:
+
+```xml
+<dependency>
+    <groupId>dev.lastrealm.bamboo</groupId>
+    <artifactId>bamboo-spring-boot-starter</artifactId>
+    <version>1.0.0-SNAPSHOT</version>
+</dependency>
+```
+
+## Quick Start
+
+1. **Configure Database**: Ensure your Spring application is connected to a MySQL database.
+2. **Add Properties**: Configure the blockchain node and events in `application.yml`.
+
+```yaml
+bamboo:
+  blockchain:
+    id: 1 # Mainnet
+    rpc-node-url: https://eth-mainnet.g.alchemy.com/v2/YOUR-API-KEY
+  event-listener:
+    contract-event-definitions:
+      # Address Key
+      "0xdac17f958d2ee523a2206206994597c13d831ec7": 
+        - signature: "Transfer(address,address,uint256)"
+```
+
+3. **Run Application**: Start your Spring Boot app. Bamboo will:
+    - Automatically create tables for the defined events.
+    - Start scanning from the latest block (or configured checkpoint).
+    - Publish events to the Spring Event Bus.
+
+## Listening to Events
+
+Create a listener component to handle the indexed events:
+
+```java
+@Component
+public class MyEventListener {
+
+    @EventListener
+    public void handleTransfer(ContractEvent event) {
+        System.out.println("Received event: " + event);
+    }
+}
+```

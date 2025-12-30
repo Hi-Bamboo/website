@@ -1,5 +1,5 @@
 import { useMDXComponents as getNextraComponents } from 'nextra/mdx-components'
-import { TOC } from './app/_components/toc'
+import { TOC } from './src/components/toc'
 
 const defaultComponents = getNextraComponents({
   wrapper({ children, toc }) {
