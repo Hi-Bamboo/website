@@ -1,0 +1,45 @@
+# Configuration
+
+Full reference for `application.yml` properties under the `bamboo` prefix.
+
+## Core Properties
+
+| Property | Type | Default | Description |
+| :--- | :--- | :--- | :--- |
+| `bamboo.auto-start-engine` | `Boolean` | `true` | Whether to automatically start the indexing engine on startup. |
+| `bamboo.auto-initialize-schema` | `Boolean` | `false` | Automatically creates database tables for configured events if they don't exist. |
+| `bamboo.auto-initialize-check-point` | `Boolean` | `false` | Automatically initializes the checkpoint to the current block height if missing. |
+| `bamboo.schedule-initial-seconds` | `Integer` | `5` | Initial delay in seconds before the first scan task runs. |
+| `bamboo.schedule-delay-seconds` | `Integer` | `2` | Interval in seconds between scan tasks. |
+| `bamboo.step-blocks` | `Integer` | `1000` | Number of blocks to scan in a single task execution. |
+
+## Blockchain Configuration
+
+| Property | Type | Description |
+| :--- | :--- | :--- |
+| `bamboo.blockchain.id` | `BigInteger` | Chain ID (e.g., 1 for Ethereum Mainnet, 137 for Polygon). Used for check-pointing. |
+| `bamboo.blockchain.rpc-node-url` | `String` | The HTTP JSON-RPC URL of the blockchain node. |
+
+## Event Initializer Configuration
+
+Define specific contracts and events to index.
+
+```yaml
+bamboo:
+  event-listener:
+    contract-event-definitions:
+      "<CONTRACT_ADDRESS>":
+        - signature: "<EVENT_SIGNATURE>"
+          # Optional: signature-hash overrides if needed
+```
+
+**Example:**
+
+```yaml
+bamboo:
+  blockchain:
+    id: 56 # BSC
+    rpc-node-url: https://bsc-dataseed.binance.org/
+  auto-initialize-schema: true
+  step-blocks: 2000
+```

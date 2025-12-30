@@ -1,0 +1,31 @@
+# API Reference
+
+> [!NOTE]
+> This API is currently in Beta. Breaking changes may occur.
+
+## Authentication
+
+All requests must include the `Authorization` header:
+
+```http
+Authorization: Bearer <your_api_key>
+```
+
+## Endpoints
+
+### List Agents
+`GET /v1/agents`
+
+Returns a list of all agents in your organization.
+
+### Run Evaluation
+`POST /v1/evaluations`
+
+Starts a new evaluation run.
+
+```json
+{
+  "agentId": "agent_123",
+  "datasetId": "dataset_456"
+}
+```

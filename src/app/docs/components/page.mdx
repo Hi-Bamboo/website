@@ -1,0 +1,28 @@
+# Components
+
+The platform provides pre-built UI components for internal tools.
+
+## Globe
+
+Visualize traffic sources in real-time.
+
+```tsx
+import { Globe } from '@adaline/ui';
+
+<Globe 
+  data={trafficData} 
+  theme="dark" 
+/>
+```
+
+## Terminal
+
+Display agent logs with syntax highlighting.
+
+```tsx
+import { Terminal } from '@adaline/ui';
+
+<Terminal 
+  lines={['Initializing...', 'Done.']} 
+/>
+```
